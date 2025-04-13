@@ -6,10 +6,10 @@ if (NOT CMAKE_BUILD_TYPE)
 endif()
 if (WIN32)
 	set(CMAKE_C_FLAGS "-D_WIN32")
+else ()
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
+    set(CMAKE_C_FLAGS_DEBUG "-O0 -g3 -DDEBUG")
 endif()
-
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
-set(CMAKE_C_FLAGS_DEBUG "-O0 -g3 -DDEBUG")
 
 set(HEADERS
 	finders.h
