@@ -1,6 +1,16 @@
 #ifndef GENERATOR_H_
 #define GENERATOR_H_
 
+#ifdef _WIN32
+  #ifdef CUBIOMES_EXPORTS
+    #define CUBIOMES_API __declspec(dllexport)
+  #else
+    #define CUBIOMES_API __declspec(dllimport)
+  #endif
+#else
+  #define CUBIOMES_API
+#endif
+
 #include "layers.h"
 #include "biomenoise.h"
 
@@ -53,7 +63,7 @@ extern "C"
  * control LARGE_BIOMES or to FORCE_OCEAN_VARIANTS to enable ocean variants at
  * scales higher than normal.
  */
-void setupGenerator(Generator *g, int mc, uint32_t flags);
+CUBIOMES_API void setupGenerator(Generator *g, int mc, uint32_t flags);
 
 /**
  * Initializes the generator for a given dimension and seed.
@@ -61,7 +71,7 @@ void setupGenerator(Generator *g, int mc, uint32_t flags);
  * dim=-1:  Nether
  * dim=+1:  End
  */
-void applySeed(Generator *g, int dim, uint64_t seed);
+CUBIOMES_API void applySeed(Generator *g, int dim, uint64_t seed);
 
 /**
  * Calculates the buffer size (number of ints) required to generate a cuboidal
@@ -70,8 +80,8 @@ void applySeed(Generator *g, int dim, uint64_t seed);
  * The function allocCache() can be used to allocate the corresponding int
  * buffer using malloc().
  */
-size_t getMinCacheSize(const Generator *g, int scale, int sx, int sy, int sz);
-int *allocCache(const Generator *g, Range r);
+CUBIOMES_API size_t getMinCacheSize(const Generator *g, int scale, int sx, int sy, int sz);
+CUBIOMES_API int *allocCache(const Generator *g, Range r);
 
 /**
  * Generates the biomes for a cuboidal scaled range given by 'r'.
@@ -86,13 +96,13 @@ int *allocCache(const Generator *g, Range r);
  *
  * The return value is zero upon success.
  */
-int genBiomes(const Generator *g, int *cache, Range r);
+CUBIOMES_API int genBiomes(const Generator *g, int *cache, Range r);
 /**
  * Gets the biome for a specified scaled position. Note that the scale should
  * be either 1 or 4, for block or biome coordinates respectively.
  * Returns none (-1) upon failure.
  */
-int getBiomeAt(const Generator *g, int scale, int x, int y, int z);
+CUBIOMES_API int getBiomeAt(const Generator *g, int scale, int x, int y, int z);
 
 /**
  * Returns the default layer that corresponds to the given scale.
@@ -125,7 +135,7 @@ Layer *setupLayer(Layer *l, mapfunc_t *map, int mc,
  * It is recommended that 'out' is allocated using allocCache() for the correct
  * buffer size.
  */
-int genArea(const Layer *layer, int *out, int areaX, int areaZ, int areaWidth, int areaHeight);
+CUBIOMES_API int genArea(const Layer *layer, int *out, int areaX, int areaZ, int areaWidth, int areaHeight);
 
 /**
  * Map an approximation of the Overworld surface height.
