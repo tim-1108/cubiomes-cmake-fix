@@ -110,7 +110,7 @@ CUBIOMES_API int getBiomeAt(const Generator *g, int scale, int x, int y, int z);
  * custom entry layer 'g->entry'.
  * (Overworld, MC <= 1.17)
  */
-const Layer *getLayerForScale(const Generator *g, int scale);
+CUBIOMES_API const Layer *getLayerForScale(const Generator *g, int scale);
 
 
 ///=============================================================================
@@ -118,15 +118,15 @@ const Layer *getLayerForScale(const Generator *g, int scale);
 ///=============================================================================
 
 /* Initialize an instance of a layered generator. */
-void setupLayerStack(LayerStack *g, int mc, int largeBiomes);
+CUBIOMES_API void setupLayerStack(LayerStack *g, int mc, int largeBiomes);
 
 /* Calculates the minimum size of the buffers required to generate an area of
  * dimensions 'sizeX' by 'sizeZ' at the specified layer.
  */
-size_t getMinLayerCacheSize(const Layer *layer, int sizeX, int sizeZ);
+CUBIOMES_API size_t getMinLayerCacheSize(const Layer *layer, int sizeX, int sizeZ);
 
 /* Set up custom layers. */
-Layer *setupLayer(Layer *l, mapfunc_t *map, int mc,
+CUBIOMES_API Layer *setupLayer(Layer *l, mapfunc_t *map, int mc,
     int8_t zoom, int8_t edge, uint64_t saltbase, Layer *p, Layer *p2);
 
 /* Generates the specified area using the current generator settings and stores
@@ -142,7 +142,7 @@ CUBIOMES_API int genArea(const Layer *layer, int *out, int areaX, int areaZ, int
  * The horizontal scaling is 1:4. If non-null, the ids are filled with the
  * biomes of the area. The height (written to y) is in blocks.
  */
-int mapApproxHeight(float *y, int *ids, const Generator *g,
+CUBIOMES_API int mapApproxHeight(float *y, int *ids, const Generator *g,
     const SurfaceNoise *sn, int x, int z, int w, int h);
 
 
