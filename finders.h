@@ -3,6 +3,15 @@
 
 
 #include "generator.h"
+#ifdef _WIN32
+  #ifdef CUBIOMES_EXPORTS
+    #define CUBIOMES_API __declspec(dllexport)
+  #else
+    #define CUBIOMES_API __declspec(dllimport)
+  #endif
+#else
+  #define CUBIOMES_API
+#endif
 
 
 #ifdef __cplusplus
